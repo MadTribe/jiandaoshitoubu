@@ -40,10 +40,14 @@
 			 .catch(error => console.error('Error:', error));
 
 
-			 if (response.msg!=='ok'){
-			 		setTimeout(wantToPlay, 2000);
-			 } else {
-				 state++;
+			 if (response){
+				 if (response.msg!=='ok'){
+				 		setTimeout(wantToPlay, 2000);
+				 } else {
+					 state++;
+				 }
+			 } else{
+			 		alert('no response')
 			 }
 
 				console.log(response);
