@@ -55,14 +55,44 @@
 
 	}
 
-	function choose(choice) {
-	console.log('choose ' + choice)
-		theirChoice = choice;
-		// event handler code goes here
-		state++;
+	async function choose(choice) {
 
-		myChoice =1;
-		theirChoice =2;
+		theirChoice = choice;
+
+		let url = "http://" + host + apiPath +  "/choice";
+		let dataObj = {
+			choice: choice
+		}
+
+		var response = await fetch(url, {
+			 method: 'POST',
+			 mode: 'cors',
+			 cache: 'no-cache',
+			 headers: {
+					 'Content-Type': 'application/json',
+			 },
+			 redirect: 'follow', // manual, *follow, error
+			 referrer: 'no-referrer', // no-referrer, *client
+			 body: JSON.stringify(dataObj)
+			 })
+			 .then(r => r.json())
+			 .catch(error => console.error('Error:', error));
+
+
+			 if (response){
+				 if (response.msg==='waiting'){
+						setTimeout(wantToPlay, 2000);
+				 } else {
+					 state++;
+				 }
+			 } else{
+					alert('no response')
+			 }
+
+				console.log(response);
+
+			myChoice =1;
+			theirChoice =2;
 	}
 </script>
 
