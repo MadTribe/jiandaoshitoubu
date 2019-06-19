@@ -4,23 +4,35 @@ package com.vmly.controller;
 import com.vmly.model.Result;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.MalformedParameterizedTypeException;
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class GameService {
 
 
-
-    public Result judge(int param){
-
+    private Map<String, Integer> map = new HashMap<String, Integer>();
 
 
+    public Result judge(int choice, String name) {
+
+        int size = map.size();
 
         //1:剪刀
-        if(param == 1 ){
+        while (true) {
+            if (size == 2) {
 
+
+
+                break;
+            } else if (size < 2) {
+                map.put(name, choice);
+            }
         }
 
-        return null;
 
+        return new Result("ok");
 
     }
 
