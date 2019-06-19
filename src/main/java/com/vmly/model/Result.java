@@ -6,11 +6,11 @@ public class Result {
 
     private String msg;
 
-    public String getCode() {
+    public String getMsg() {
         return msg;
     }
 
-    public void setCode(String code) {
+    public void setMsg(String msg) {
         this.msg = msg;
     }
 

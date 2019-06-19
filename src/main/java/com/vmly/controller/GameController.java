@@ -18,26 +18,13 @@ import java.util.Set;
 @RestController("/")
 public class GameController {
 
-
     @Autowired
     private GameService gameService;
-
-    private static Set<String> players = new HashSet<>();
 
 
     @RequestMapping(method = RequestMethod.POST, value = "wanttoplay")
     public Result wanttoplay(String player) {
-
-        int playerSize = players.size();
-        if (playerSize == 2) {
-            return new Result("you are ready");
-        } else if (playerSize < 2) {
-            players.add(player);
-            return new Result("ok");
-        }
-
-        return null;
-
+        return gameService.wanttopay(player);
     }
 
 
@@ -47,9 +34,10 @@ public class GameController {
     }
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/result")
+    @RequestMapping(method = RequestMethod.GET, value = "/result")
     public String result(String name) {
         return gameService.judge(name);
     }
+
 
 }
