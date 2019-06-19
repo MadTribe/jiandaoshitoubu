@@ -15,16 +15,13 @@ public class GameService {
     private Map<String, Integer> map = new HashMap<String, Integer>();
 
 
-    public Result judge(int choice, String name) {
+    public Result choice(int choice, String name) {
 
         int size = map.size();
 
         //1:剪刀
         while (true) {
             if (size == 2) {
-
-
-
                 break;
             } else if (size < 2) {
                 map.put(name, choice);

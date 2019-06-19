@@ -34,7 +34,7 @@ public class GameController {
 
     @RequestMapping(method = RequestMethod.POST, name = "/choice")
     public Result choice(int choice,String name) {
-        return gameService.judge(choice,name);
+        return gameService.choice(choice,name);
     }
 
 
