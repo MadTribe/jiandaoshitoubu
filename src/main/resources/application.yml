@@ -3,5 +3,4 @@ spring:
     name: game
 
 server:
-  context-path: /game
   port: 8080
