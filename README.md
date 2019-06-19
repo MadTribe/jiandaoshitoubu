@@ -32,6 +32,11 @@ param=jiandao=1
 param=shitou=2
 param=bu=3
 
+name=jay
+
+
+
+
 result : {
 	msg : "waiting"
 }
