@@ -5,7 +5,20 @@
 0:jiandao
 1:shitou
 2:bu
+
+public enum JianDaoShiTouBuEnum {
+    JIANDAO,
+    SHITOU,
+    BU
+}
+
+
 ```
+
+
+
+
+
 
 
 **1.wanttoplay**
@@ -56,7 +69,7 @@ return : "OK"
 ```
 
 Ajax: get 
-API : /result
+API : http://localhost:8080/result
 
 result : {
 	msg : "lose"
