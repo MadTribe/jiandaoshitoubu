@@ -1,6 +1,7 @@
 package com.vmly.service;
 
 
+import com.vmly.model.JudgeResult;
 import com.vmly.model.Result;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -61,10 +62,10 @@ public class GameService {
      * @param name
      * @return
      */
-    public String judge(String name) {
+    public JudgeResult judge(String name) {
 
         if (map.size() < 2) {
-            return "please join the game!";
+            return null;
         }
 
 
@@ -81,29 +82,37 @@ public class GameService {
         Integer choice1 = map.get(player1);
         Integer choice2 = map.get(player2);
 
+        JudgeResult judgeResult = new JudgeResult();
+        judgeResult.setResult(JudgeResult.Result.SUCCESS);
+
         if (choice1 == 1 && choice2 == 2) {
-            return player2 + "win";
+            judgeResult.setUsername(player2);
+
         }
 
         if (choice1 == 1 && choice2 == 3) {
-            return player1 + "win";
+            judgeResult.setUsername(player1);
         }
 
         if (choice1 == 2 && choice2 == 3) {
-            return player2 + "win";
+            judgeResult.setUsername(player2);
+        }
+
+        if (choice1 == 2 && choice2 == 1) {
+            judgeResult.setUsername(player1);
         }
 
 
         if (choice1 == 3 && choice2 == 2) {
-            return player1 + "win";
+            judgeResult.setUsername(player1);
         }
 
 
         if (choice1 == 3 && choice2 == 1) {
-            return player2 + "win";
+            judgeResult.setUsername(player2);
         }
 
-        return " please choice again !";
+        return judgeResult;
 
 
     }

@@ -1,8 +1,10 @@
 package com.vmly.model;
 
 
+import java.security.PrivateKey;
 
 public class Result {
+
 
     private String msg;
 

@@ -1,3 +1,4 @@
+import com.vmly.model.JudgeResult;
 import com.vmly.model.Result;
 import com.vmly.service.GameService;
 import org.junit.Assert;
@@ -33,22 +34,6 @@ public class GameServiceTest {
     }
 
 
-    /**
-     * choice=jiandao=1 jay
-     *
-     * choice=shitou=2 tom
-     *
-     * //choice=bu=3
-     *
-     */
-    @Test
-    public void testChoice1() {
-        Result jayResult = gameService.choice(1, "jay");
-        Result tomResult = gameService.choice(2, "tom");
-    }
-
-
-
 
     /**
      * 1 jiandao
@@ -67,8 +52,13 @@ public class GameServiceTest {
         Result choiceTom = gameService.choice(2, "tom");
 
 
-        String result = gameService.judge("jay");
-        assertEquals("tomwin",result);
+        JudgeResult result = gameService.judge("jay");
+
+        assertEquals(JudgeResult.Result.SUCCESS,result.getResult());
+
+
+
+        assertEquals("tom",result.getUsername());
     }
 
 
@@ -92,8 +82,11 @@ public class GameServiceTest {
         Result choiceTom = gameService.choice(3, "tom");
 
 
-        String result = gameService.judge("jay");
-        assertEquals("jaywin",result);
+        JudgeResult result = gameService.judge("jay");
+
+        assertEquals(JudgeResult.Result.SUCCESS,result.getResult());
+
+        assertEquals("jay",result.getUsername());
     }
 
 
@@ -114,10 +107,11 @@ public class GameServiceTest {
         Result choiceTom = gameService.choice(1, "tom");
 
 
-        String result = gameService.judge("jay");
-        assertEquals("tomwin",result);
-    }
+        JudgeResult result = gameService.judge("jay");
 
+        assertEquals(JudgeResult.Result.SUCCESS,result.getResult());
+        assertEquals("tom",result.getResult());
+    }
 
 
     /**
@@ -136,8 +130,11 @@ public class GameServiceTest {
         Result choiceJay = gameService.choice(2, "jay");
 
 
-        String result = gameService.judge("jay");
-        assertEquals("tomwin",result);
+        JudgeResult result = gameService.judge("jay");
+
+        assertEquals(JudgeResult.Result.SUCCESS,result.getResult());
+
+        assertEquals("tom",result.getUsername());
     }
 
 
@@ -156,8 +153,11 @@ public class GameServiceTest {
         Result choiceTom = gameService.choice(2, "tom");
         Result choiceJay = gameService.choice(3, "jay");
 
-        String result = gameService.judge("jay");
-        assertEquals("jaywin",result);
+        JudgeResult result = gameService.judge("jay");
+
+        //jaywin
+        assertEquals("jay",result.getUsername());
+        assertEquals(JudgeResult.Result.SUCCESS,result.getResult());
     }
 
 

@@ -1,6 +1,7 @@
 package com.vmly.controller;
 
 
+import com.vmly.model.JudgeResult;
 import com.vmly.service.GameService;
 import com.vmly.model.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class GameController {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/result")
-    public String result(String name) {
+    public JudgeResult result(String name) {
         return gameService.judge(name);
     }
 
