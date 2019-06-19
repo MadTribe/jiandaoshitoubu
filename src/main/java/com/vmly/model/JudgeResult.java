@@ -2,13 +2,13 @@ package com.vmly.model;
 
 public class JudgeResult {
 
-    private String username;
+    private String name;
 
     private Result result;
 
     public enum Result {
         LOSE,
-        SUCCESS
+        WIN
     }
 
 
@@ -20,16 +20,16 @@ public class JudgeResult {
         this.result = result;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public JudgeResult(String username, Result result) {
-        this.username = username;
+    public JudgeResult(String name, Result result) {
+        this.name = name;
         this.result = result;
     }
 

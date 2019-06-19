@@ -1,14 +1,12 @@
+import com.vmly.model.JianDaoShiTouBuEnum;
 import com.vmly.model.JudgeResult;
 import com.vmly.model.Result;
+import com.vmly.model.User;
 import com.vmly.service.GameService;
-import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Set;
 
-import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 
@@ -19,18 +17,18 @@ public class GameServiceTest {
 
     @Test
     public void testWanttopay() {
-        Result jay = gameService.wanttopay("jay");
-        assertEquals(jay.getMsg(), "ok");
 
-        Result tom = gameService.wanttopay("tom");
-        assertEquals(tom.getMsg(), "ok");
+        Result jay = gameService.wanttopay(new User("jay"));
+        assertEquals(jay, Result.OK);
 
-        Result tomCopy = gameService.wanttopay("tom");
-        Set<String> players = gameService.getPlayers();
+        Result tom = gameService.wanttopay(new User("tom"));
+        assertEquals(tom, Result.OK);
+
+        Result tomCopy = gameService.wanttopay(new User("tom"));
+        Set<User> players = gameService.getPlayers();
 
         assertEquals(players.size(), 2);
-        assertTrue(players.contains("tom"));
-        assertTrue(players.contains("jay"));
+
     }
 
 
@@ -42,23 +40,23 @@ public class GameServiceTest {
      */
     @Test
     public void testResult1(){//
-        Result jay = gameService.wanttopay("jay");
-        assertEquals(jay.getMsg(), "ok");
+        Result jay = gameService.wanttopay(new User("jay"));
+        assertEquals(jay, Result.OK);
 
-        Result tom = gameService.wanttopay("tom");
-        assertEquals(jay.getMsg(), "ok");
+        Result tom = gameService.wanttopay(new User("tom"));
+        assertEquals(tom, Result.OK);
 
-        Result choiceJay = gameService.choice(1, "jay");
-        Result choiceTom = gameService.choice(2, "tom");
-
-
-        JudgeResult result = gameService.judge("jay");
-
-        assertEquals(JudgeResult.Result.SUCCESS,result.getResult());
+        Result choiceJay = gameService.choice(JianDaoShiTouBuEnum.JIANDAO.ordinal(), new User("jay"));
+        Result choiceTom = gameService.choice(JianDaoShiTouBuEnum.SHITOU.ordinal(), new User("tom"));
 
 
+        JudgeResult result = gameService.judge();
 
-        assertEquals("tom",result.getUsername());
+        assertEquals(JudgeResult.Result.WIN,result.getResult());
+
+
+
+        assertEquals("tom",result.getName());
     }
 
 
@@ -71,22 +69,22 @@ public class GameServiceTest {
      * 1 win
      */
     @Test
-    public void testResult2(){//
-        Result jay = gameService.wanttopay("jay");
-        assertEquals(jay.getMsg(), "ok");
+    public void testResult2(){
+        Result jay = gameService.wanttopay(new User("jay"));
+        assertEquals(jay, Result.WAITING);
 
-        Result tom = gameService.wanttopay("tom");
-        assertEquals(jay.getMsg(), "ok");
+        Result tom = gameService.wanttopay(new User("tom"));
+        assertEquals(tom, Result.OK);
 
-        Result choiceJay = gameService.choice(1, "jay");
-        Result choiceTom = gameService.choice(3, "tom");
+        Result choiceJay = gameService.choice(JianDaoShiTouBuEnum.JIANDAO.ordinal(), new User("jay"));
+        Result choiceTom = gameService.choice(JianDaoShiTouBuEnum.BU.ordinal(), new User("tom"));
 
 
-        JudgeResult result = gameService.judge("jay");
+        JudgeResult result = gameService.judge();
 
-        assertEquals(JudgeResult.Result.SUCCESS,result.getResult());
+        assertEquals(JudgeResult.Result.WIN,result.getResult());
 
-        assertEquals("jay",result.getUsername());
+        assertEquals("jay",result.getName());
     }
 
 
@@ -97,20 +95,20 @@ public class GameServiceTest {
      */
     @Test
     public void testResult3(){//
-        Result jay = gameService.wanttopay("jay");
-        assertEquals(jay.getMsg(), "ok");
+        Result jay = gameService.wanttopay(new User("jay"));
+        assertEquals(jay, Result.OK);
 
-        Result tom = gameService.wanttopay("tom");
-        assertEquals(jay.getMsg(), "ok");
+        Result tom = gameService.wanttopay(new User("tom"));
+        assertEquals(tom, Result.OK);
 
-        Result choiceJay = gameService.choice(3, "jay");
-        Result choiceTom = gameService.choice(1, "tom");
+        Result choiceJay = gameService.choice(JianDaoShiTouBuEnum.BU.ordinal(), new User("jay"));
+        Result choiceTom = gameService.choice(JianDaoShiTouBuEnum.JIANDAO.ordinal(), new User("tom"));
 
 
-        JudgeResult result = gameService.judge("jay");
+        JudgeResult result = gameService.judge();
 
-        assertEquals(JudgeResult.Result.SUCCESS,result.getResult());
-        assertEquals("tom",result.getResult());
+        assertEquals(JudgeResult.Result.WIN,result.getResult());
+        assertEquals("tom",result.getName());
     }
 
 
@@ -120,21 +118,21 @@ public class GameServiceTest {
      */
     @Test
     public void testResult4(){//
-        Result jay = gameService.wanttopay("jay");
-        assertEquals(jay.getMsg(), "ok");
+        Result jay = gameService.wanttopay(new User("jay"));
+        assertEquals(jay, Result.OK);
 
-        Result tom = gameService.wanttopay("tom");
-        assertEquals(jay.getMsg(), "ok");
+        Result tom = gameService.wanttopay(new User("tom"));
+        assertEquals(tom, Result.OK);
 
-        Result choiceTom = gameService.choice(3, "tom");
-        Result choiceJay = gameService.choice(2, "jay");
+        Result choiceTom = gameService.choice(JianDaoShiTouBuEnum.BU.ordinal(), new User("tom"));
+        Result choiceJay = gameService.choice(JianDaoShiTouBuEnum.SHITOU.ordinal(), new User("jay"));
 
 
-        JudgeResult result = gameService.judge("jay");
+        JudgeResult result = gameService.judge();
 
-        assertEquals(JudgeResult.Result.SUCCESS,result.getResult());
+        assertEquals(JudgeResult.Result.WIN,result.getResult());
 
-        assertEquals("tom",result.getUsername());
+        assertEquals("tom",result.getName());
     }
 
 
@@ -143,34 +141,23 @@ public class GameServiceTest {
      * 3 bu
      */
     @Test
-    public void testResult5(){//
-        Result jay = gameService.wanttopay("jay");
-        assertEquals(jay.getMsg(), "ok");
+    public void testResult5(){
 
-        Result tom = gameService.wanttopay("tom");
-        assertEquals(jay.getMsg(), "ok");
+        Result jay = gameService.wanttopay(new User("jay"));
+        assertEquals(jay, Result.OK);
 
-        Result choiceTom = gameService.choice(2, "tom");
-        Result choiceJay = gameService.choice(3, "jay");
+        Result tom = gameService.wanttopay(new User("tom"));
+        assertEquals(tom, Result.OK);
 
-        JudgeResult result = gameService.judge("jay");
+        Result choiceTom = gameService.choice(JianDaoShiTouBuEnum.SHITOU.ordinal(), new User("tom"));
+        Result choiceJay = gameService.choice(JianDaoShiTouBuEnum.BU.ordinal(), new User("jay"));
+
+        JudgeResult result = gameService.judge();
 
         //jaywin
-        assertEquals("jay",result.getUsername());
-        assertEquals(JudgeResult.Result.SUCCESS,result.getResult());
+        assertEquals("jay",result.getName());
+        assertEquals(JudgeResult.Result.WIN,result.getResult());
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
