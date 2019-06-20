@@ -19,7 +19,7 @@ public class GameServiceTest {
     public void testWanttopay() {
 
         Result jay = gameService.wanttopay(new User("jay"));
-        assertEquals(jay, Result.OK);
+        assertEquals(jay, Result.WAITING);
 
         Result tom = gameService.wanttopay(new User("tom"));
         assertEquals(tom, Result.OK);
