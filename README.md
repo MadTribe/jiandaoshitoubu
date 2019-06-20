@@ -71,11 +71,7 @@ return : "OK"
 Ajax: get 
 API : http://localhost:8080/result
 
-result : {
-	msg : "lose"
-}
-
-or
+result : 
 
 {
     "name": "jay",
