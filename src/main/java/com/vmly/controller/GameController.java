@@ -31,7 +31,7 @@ public class GameController {
     }
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/result")
+    @RequestMapping(method = RequestMethod.GET, value = "result")
     public JudgeResult result() {
         return gameService.judge();
     }
