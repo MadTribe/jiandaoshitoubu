@@ -34,9 +34,9 @@ public class GameServiceTest {
 
 
     /**
-     * 1 jiandao
-     * 2 shitou
-     * 2 win
+     * 0 jiandao
+     * 1 shitou
+     * 1 win
      */
     @Test
     public void testResult1(){//
@@ -64,9 +64,9 @@ public class GameServiceTest {
 
 
     /**
-     * 1 jiandao
-     * 3 bu
-     * 1 win
+     * 0 jiandao
+     * 2 bu
+     * 0 win
      */
     @Test
     public void testResult2(){
@@ -89,9 +89,9 @@ public class GameServiceTest {
 
 
     /**
-     * 1 jiandao
-     * 3 bu
-     * 1 win
+     * 0 jiandao
+     * 2 bu
+     * 0 win
      */
     @Test
     public void testResult3(){//
@@ -113,8 +113,8 @@ public class GameServiceTest {
 
 
     /**
-     * 2 shitou
-     * 3 bu
+     * 1 shitou
+     * 2 bu
      */
     @Test
     public void testResult4(){//
@@ -137,8 +137,8 @@ public class GameServiceTest {
 
 
     /**
-     * 2 shitou
-     * 3 bu
+     * 1 shitou
+     * 2 bu
      */
     @Test
     public void testResult5(){
